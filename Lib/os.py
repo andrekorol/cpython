@@ -592,15 +592,15 @@ def lwalk(top, level=1, topdown=True, onerror=None, followlinks=False):
             dirs.remove('CVS')  # don't visit CVS directories
 
     """
-    def lwalk(top, level=1, topdown=True, onerror=None, followlinks=False):
-        top = top.rstrip(path.sep)
-        assert path.isdir(top)
-        num_sep = top.count(path.sep)
-        for toppath, dirs, nondirs in walk(top, topdown, onerror, followlinks):
-            yield toppath, dirs, nondirs
-            num_sep_this = toppath.count(path.sep)
-            if num_sep + level <= num_sep_this:
-                del dirs[:]
+
+    top = top.rstrip(path.sep)
+    assert path.isdir(top)
+    num_sep = top.count(path.sep)
+    for toppath, dirs, nondirs in walk(top, topdown, onerror, followlinks):
+        yield toppath, dirs, nondirs
+        num_sep_this = toppath.count(path.sep)
+        if num_sep + level <= num_sep_this:
+            del dirs[:]
 
 
 __all__.append("lwalk")
